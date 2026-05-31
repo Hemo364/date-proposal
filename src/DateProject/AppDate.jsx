@@ -97,7 +97,7 @@ const AppDate = () => {
           onMouseEnter={moveNo}
           onPointerEnter={moveNo}
           onPointerDown={moveNo}
-          className={`bg-pink-400 text-white px-7 py-3 rounded-xl shadow-lg transition-all duration-150 ${
+          className={`bg-pink-400 text-white px-7 py-12 rounded-xl shadow-lg transition-all duration-150 ${
             noPos ? "absolute" : ""
           }`}
           style={
