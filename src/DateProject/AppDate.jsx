@@ -79,6 +79,7 @@ const AppDate = () => {
 
       <div className="flex flex-col items-center gap-3 mt-6">
         <button
+          type="button"
           onClick={() => setStep("set")}
           className="py-3 text-white transition bg-pink-600 shadow-lg px-7 rounded-xl active:scale-95"
         >
@@ -87,9 +88,20 @@ const AppDate = () => {
 
         <button
           ref={noBtnRef}
+          type="button"
           onMouseEnter={moveNo}
           onPointerEnter={moveNo}
-          onPointerDown={moveNo}
+          onPointerDown={(e) => {
+            // جلوگیری از ghost click که بعد از جابه‌جایی می‌تونه روی Yes بیفته
+            e.preventDefault();
+            e.stopPropagation();
+            moveNo();
+          }}
+          onClick={(e) => {
+            // برای اطمینان: اجازه نده هیچ کلیکی ثبت بشه
+            e.preventDefault();
+            e.stopPropagation();
+          }}
           className={`bg-pink-400 text-white px-7 py-3 rounded-xl shadow-lg transition-all duration-150 ${
             noPos ? "absolute" : ""
           }`}
