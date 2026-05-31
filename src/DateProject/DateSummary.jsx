@@ -1,32 +1,43 @@
-export default function DateSummary({ time, place, onRestart }) {
+import React from "react";
+
+const DateSummary = ({ time, place, onRestart }) => {
   return (
-    <div className="w-full max-w-md p-6 text-center bg-white border border-pink-100 shadow-xl rounded-3xl">
-      <div className="mb-4 text-5xl">🎉</div>
+    <div className="flex flex-col items-center justify-center w-screen px-4 py-8 h-dvh bg-gradient-to-b from-pink-100 to-pink-200">
+      <div className="w-full max-w-sm p-6 border border-pink-200 shadow-xl bg-white/80 backdrop-blur rounded-3xl">
+        <div className="text-center">
+          <div className="mb-2 text-5xl">🎀</div>
+          <h1 className="text-2xl font-extrabold text-pink-700">
+            قرارمون ست شد!
+          </h1>
+          <p className="mt-2 text-pink-700/80">جزئیات:</p>
+        </div>
 
-      <h2 className="mb-3 text-2xl font-bold text-pink-600">
-        عالیه! قرارمون ثبت شد
-      </h2>
+        <div className="mt-5 space-y-3">
+          <div className="flex items-center justify-between px-4 py-3 border border-pink-100 bg-pink-50 rounded-2xl">
+            <span className="font-semibold text-pink-700">ساعت</span>
+            <span className="text-pink-800">{time || "—"}</span>
+          </div>
 
-      <div className="p-4 mb-5 space-y-2 text-gray-700 bg-pink-50 rounded-2xl">
-        <p>
-          <span className="font-semibold">ساعت:</span> {time}
-        </p>
-        <p>
-          <span className="font-semibold">مکان:</span> {place}
-        </p>
+          <div className="flex items-center justify-between px-4 py-3 border border-pink-100 bg-pink-50 rounded-2xl">
+            <span className="font-semibold text-pink-700">مکان</span>
+            <span className="text-pink-800">{place || "—"}</span>
+          </div>
+        </div>
+
+        <div className="mt-6 text-center">
+          <p className="text-lg font-bold text-pink-700">منتظرت هستم</p>
+          <p className="mt-1 text-pink-700/80">پس حتماً آماده باش :)</p>
+        </div>
+
+        <button
+          onClick={onRestart}
+          className="flex items-center justify-center w-full py-3 mt-6 text-white transition bg-pink-600 shadow-lg rounded-xl active:scale-95"
+        >
+          دوباره از اول
+        </button>
       </div>
-
-      <p className="mb-5 text-sm text-gray-500">
-        منتظر یه قرار خوشگل و قشنگ باش 💕
-      </p>
-
-      <button
-        type="button"
-        onClick={onRestart}
-        className="px-5 py-3 font-semibold text-white bg-gray-900 rounded-2xl"
-      >
-        Restart
-      </button>
     </div>
   );
-}
+};
+
+export default DateSummary;

@@ -1,94 +1,83 @@
-import { useState } from "react";
+import React, { useMemo, useState } from "react";
 
-const places = [
-  "Cafe Rooz",
-  "Tehroon Cafe",
-  "Black Milk",
-  "Cafe Deh",
-  "Mokh Cafe",
-  "Navid Cafe",
-];
+const PLACES = ["کافه منوچهری☕", "کافه وال☕", "کافه دارچین☕", "یه جا دیگه"];
 
-export default function SetDate({ onNext, onBack }) {
-  const [time, setTime] = useState("");
-  const [place, setPlace] = useState("");
+const SetDate = ({ onBack, onNext, initialValue }) => {
+  const [selectedTime, setSelectedTime] = useState(initialValue?.time ?? "");
+  const [selectedPlace, setSelectedPlace] = useState(initialValue?.place ?? "");
 
-  const canNext = time && place;
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!canNext) return;
-    onNext({ time, place });
-  };
+  const canNext = useMemo(() => {
+    return Boolean(selectedTime) && Boolean(selectedPlace);
+  }, [selectedTime, selectedPlace]);
 
   return (
-    <div className="w-full max-w-md p-6 bg-white border border-pink-100 shadow-xl rounded-3xl">
-      <div className="mb-6 text-center">
-        <h2 className="mb-2 text-2xl font-bold text-pink-600">
-          حالا زمان و مکان رو انتخاب کن
-        </h2>
-        <p className="text-sm text-gray-500">
-          یه وقت خوب و یه کافه خوب انتخاب کن ☕
-        </p>
+    <div className="flex flex-col items-center w-screen px-4 py-6 overflow-hidden bg-pink-100 h-dvh">
+      <h1 className="px-5 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-500 rounded-2xl">
+        چه ساعتی؟
+      </h1>
+
+      <div className="w-full max-w-sm mt-4">
+        <label className="block mb-2 font-semibold text-pink-700">
+          ساعت رو انتخاب کن:
+        </label>
+
+        <input
+          type="time"
+          value={selectedTime}
+          onChange={(e) => setSelectedTime(e.target.value)}
+          className="w-full px-4 py-3 bg-white border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+        />
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <div>
-          <label className="block mb-2 text-sm font-medium text-gray-700">
-            ساعت
-          </label>
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-200 outline-none rounded-2xl focus:ring-2 focus:ring-pink-300"
-          />
-        </div>
+      <h3 className="px-5 py-3 mt-6 text-lg font-semibold text-center text-white bg-pink-500 rounded-2xl">
+        کجا؟
+      </h3>
 
-        <div>
-          <label className="block mb-2 text-sm font-medium text-gray-700">
-            کافه
-          </label>
-          <div className="grid grid-cols-2 gap-3">
-            {places.map((p) => (
-              <button
-                key={p}
-                type="button"
-                onClick={() => setPlace(p)}
-                className={`rounded-2xl px-3 py-3 text-sm font-medium border transition ${
-                  place === p
-                    ? "bg-pink-500 text-white border-pink-500"
-                    : "bg-white text-gray-700 border-gray-200"
+      <div className="grid w-full max-w-sm grid-cols-1 gap-2 mt-3">
+        {PLACES.map((place) => {
+          const active = selectedPlace === place;
+          return (
+            <button
+              key={place}
+              type="button"
+              onClick={() => setSelectedPlace(place)}
+              className={`px-4 py-3 rounded-xl shadow-sm border transition text-right
+                ${
+                  active
+                    ? "bg-pink-600 text-white border-pink-600"
+                    : "bg-white text-pink-700 border-pink-200"
                 }`}
-              >
-                {p}
-              </button>
-            ))}
-          </div>
-        </div>
+            >
+              {place}
+            </button>
+          );
+        })}
+      </div>
 
-        <div className="flex gap-3 pt-2">
-          <button
-            type="button"
-            onClick={onBack}
-            className="flex-1 px-4 py-3 font-semibold text-gray-700 border border-gray-200 rounded-2xl"
-          >
-            Back
-          </button>
+      <div className="flex w-full max-w-sm gap-3 pt-6 mt-auto">
+        <button
+          type="button"
+          onClick={onBack}
+          className="flex items-center justify-center w-1/3 py-3 text-pink-700 bg-white border border-pink-200 shadow-sm rounded-xl"
+        >
+          Back
+        </button>
 
-          <button
-            type="submit"
-            disabled={!canNext}
-            className={`flex-1 rounded-2xl px-4 py-3 font-semibold transition ${
-              canNext
-                ? "bg-pink-500 text-white"
-                : "bg-gray-200 text-gray-400 cursor-not-allowed"
-            }`}
-          >
-            Next
-          </button>
-        </div>
-      </form>
+        <button
+          type="button"
+          disabled={!canNext}
+          onClick={() => onNext({ time: selectedTime, place: selectedPlace })}
+          className={`w-2/3 py-3 rounded-xl shadow-lg transition flex items-center justify-center ${
+            canNext
+              ? "bg-pink-600 text-white active:scale-95"
+              : "bg-pink-300 text-white/70 cursor-not-allowed"
+          }`}
+        >
+          Next✨
+        </button>
+      </div>
     </div>
   );
-}
+};
+
+export default SetDate;

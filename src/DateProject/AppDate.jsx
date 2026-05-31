@@ -1,150 +1,107 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import SetDate from "./SetDate";
 import DateSummary from "./DateSummary";
 
-export default function AppDate() {
-  const [step, setStep] = useState("ask");
-  const [dateData, setDateData] = useState({
-    time: "",
-    place: "",
-  });
-
+const AppDate = () => {
   const containerRef = useRef(null);
   const noBtnRef = useRef(null);
 
-  const [noPos, setNoPos] = useState({
-    x: 0,
-    y: 0,
-  });
+  const [noPos, setNoPos] = useState(null);
 
-  const [isNoReady, setIsNoReady] = useState(false);
+  // "ask" | "set" | "done"
+  const [step, setStep] = useState("ask");
+
+  // به جای date => time
+  const [info, setInfo] = useState({
+    time: "", // "HH:MM"
+    place: "",
+  });
 
   const moveNo = () => {
     const container = containerRef.current;
-    const btn = noBtnRef.current;
+    const noBtn = noBtnRef.current;
+    if (!container || !noBtn) return;
 
-    if (!container || !btn) return;
-
-    const containerRect = container.getBoundingClientRect();
-    const btnRect = btn.getBoundingClientRect();
+    const c = container.getBoundingClientRect();
+    const b = noBtn.getBoundingClientRect();
 
     const padding = 12;
+    const maxLeft = c.width - b.width - padding;
+    const maxTop = c.height - b.height - padding;
 
-    const maxX = containerRect.width - btnRect.width - padding;
-    const maxY = containerRect.height - btnRect.height - padding;
+    const left = Math.floor(padding + Math.random() * Math.max(0, maxLeft));
+    const top = Math.floor(padding + Math.random() * Math.max(0, maxTop));
 
-    if (maxX <= 0 || maxY <= 0) return;
-
-    const x = Math.floor(Math.random() * maxX);
-    const y = Math.floor(Math.random() * maxY);
-
-    setNoPos({ x, y });
-    setIsNoReady(true);
+    setNoPos({ left, top });
   };
 
-  useEffect(() => {
-    // بعد از رندر اولیه، یک بار دکمه را جابه‌جا کن تا موقعیت اولیه درست ثبت شود
-    const t = requestAnimationFrame(() => {
-      moveNo();
-    });
+  if (step === "set") {
+    return (
+      <SetDate
+        initialValue={info}
+        onBack={() => setStep("ask")}
+        onNext={({ time, place }) => {
+          setInfo({ time, place });
+          setStep("done");
+        }}
+      />
+    );
+  }
 
-    return () => cancelAnimationFrame(t);
-  }, []);
-
-  const handleYes = () => {
-    setStep("set");
-  };
-
-  const handleNoPointerDown = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    moveNo();
-  };
-
-  const handleNoMouseEnter = () => {
-    moveNo();
-  };
-
-  const handleNoPointerEnter = () => {
-    moveNo();
-  };
-
-  const handleSetDateNext = (data) => {
-    setDateData(data);
-    setStep("done");
-  };
-
-  const handleRestart = () => {
-    setStep("ask");
-    setDateData({ time: "", place: "" });
-    setIsNoReady(false);
-
-    requestAnimationFrame(() => {
-      moveNo();
-    });
-  };
+  if (step === "done") {
+    return (
+      <DateSummary
+        time={info.time}
+        place={info.place}
+        onRestart={() => {
+          setInfo({ time: "", place: "" });
+          setNoPos(null);
+          setStep("ask");
+        }}
+      />
+    );
+  }
 
   return (
-    <div className="flex items-center justify-center px-4 py-6 min-h-dvh bg-pink-50">
-      {step === "ask" && (
-        <div
-          ref={containerRef}
-          className="relative w-full max-w-md h-[320px] rounded-3xl bg-white shadow-xl border border-pink-100 overflow-hidden flex flex-col items-center justify-center px-6"
+    <div
+      ref={containerRef}
+      className="relative flex flex-col items-center justify-center w-screen px-4 overflow-hidden bg-pink-100 h-dvh"
+    >
+      <i className="text-6xl animate-bounce">🎀</i>
+
+      <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-pink-500 rounded-2xl">
+        Hello dear Melika
+      </h1>
+
+      <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-pink-500 rounded-2xl">
+        ?will you go on a date with me
+      </h1>
+
+      <div className="flex flex-col items-center gap-3 mt-6">
+        <button
+          onClick={() => setStep("set")}
+          className="py-3 text-white transition bg-pink-600 shadow-lg px-7 rounded-xl active:scale-95"
         >
-          <div className="mb-8 text-center">
-            <div className="mb-4 text-5xl animate-floaty">💖</div>
-            <h1 className="mb-2 text-2xl font-bold text-pink-600">
-              می‌خوای با من دیت بری؟
-            </h1>
-            <p className="text-sm text-gray-500">
-              فقط یه جواب درست وجود داره 😌
-            </p>
-          </div>
+          Yes💗
+        </button>
 
-          <div className="relative flex items-center justify-center w-full gap-4">
-            <button
-              type="button"
-              onClick={handleYes}
-              className="px-6 py-3 font-semibold text-white transition bg-pink-500 shadow-md rounded-2xl active:scale-95"
-            >
-              Yes
-            </button>
-
-            <button
-              ref={noBtnRef}
-              type="button"
-              onPointerDown={handleNoPointerDown}
-              onPointerEnter={handleNoPointerEnter}
-              onMouseEnter={handleNoMouseEnter}
-              className={`px-6 py-3 rounded-2xl bg-gray-200 text-gray-700 font-semibold shadow-md transition-all duration-200 select-none touch-none ${
-                isNoReady ? "absolute" : "relative"
-              }`}
-              style={
-                isNoReady
-                  ? {
-                      left: `${noPos.x}px`,
-                      top: `${noPos.y}px`,
-                    }
-                  : undefined
-              }
-            >
-              No
-            </button>
-          </div>
-        </div>
-      )}
-
-      {step === "set" && (
-        <SetDate onNext={handleSetDateNext} onBack={() => setStep("ask")} />
-      )}
-
-      {step === "done" && (
-        <DateSummary
-          time={dateData.time}
-          place={dateData.place}
-          onRestart={handleRestart}
-        />
-      )}
+        <button
+          ref={noBtnRef}
+          onMouseEnter={moveNo}
+          onPointerEnter={moveNo}
+          onPointerDown={moveNo}
+          className={`bg-pink-400 text-white px-7 py-3 rounded-xl shadow-lg transition-all duration-150 ${
+            noPos ? "absolute" : ""
+          }`}
+          style={
+            noPos ? { left: `${noPos.left}px`, top: `${noPos.top}px` } : undefined
+          }
+        >
+          No
+        </button>
+      </div>
     </div>
   );
-}
+};
+
+export default AppDate;
