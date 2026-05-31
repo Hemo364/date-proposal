@@ -17,7 +17,12 @@ const AppDate = () => {
     place: "",
   });
 
-  const moveNo = () => {
+  const moveNo = (e) => {
+    // این خط از شیفت شدن لی‌اوت و کلیک شدن ناخواسته روی دکمه Yes جلوگیری می‌کند
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+
     const container = containerRef.current;
     const noBtn = noBtnRef.current;
     if (!container || !noBtn) return;
@@ -87,21 +92,11 @@ const AppDate = () => {
         </button>
 
         <button
-          ref={noBtnRef}
           type="button"
+          ref={noBtnRef}
           onMouseEnter={moveNo}
           onPointerEnter={moveNo}
-          onPointerDown={(e) => {
-            // جلوگیری از ghost click که بعد از جابه‌جایی می‌تونه روی Yes بیفته
-            e.preventDefault();
-            e.stopPropagation();
-            moveNo();
-          }}
-          onClick={(e) => {
-            // برای اطمینان: اجازه نده هیچ کلیکی ثبت بشه
-            e.preventDefault();
-            e.stopPropagation();
-          }}
+          onPointerDown={moveNo}
           className={`bg-pink-400 text-white px-7 py-3 rounded-xl shadow-lg transition-all duration-150 ${
             noPos ? "absolute" : ""
           }`}
