@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 
-const PLACES = ["کافه منوچهری☕", "کافه وال☕", "کافه دارچین☕", "یه جا دیگه"];
+const PLACES = ["کافه منوچهری🏡", "کافه مون🌓", "کافه دارچین☕", "کافه وی🧁","کافه ایوار🧱","یه جای دیگه🙂"];
 
 const SetDate = ({ onBack, onNext, initialValue }) => {
   const [selectedTime, setSelectedTime] = useState(initialValue?.time ?? "");
