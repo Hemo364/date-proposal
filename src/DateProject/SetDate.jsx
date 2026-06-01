@@ -13,6 +13,9 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
   return (
     
     <div className="flex flex-col items-center w-screen px-4 py-6 overflow-hidden bg-pink-100 h-dvh">
+      <h1 className="px-10 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-300 rounded-xl">
+        آفرییین حالا دختر خوبی شدی😄
+      </h1>
       <h1 className="px-5 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
         چه ساعتی؟
       </h1>

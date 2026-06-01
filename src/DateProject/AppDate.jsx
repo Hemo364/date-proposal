@@ -88,7 +88,7 @@ const AppDate = () => {
           onClick={() => setStep("set")}
           className="py-3 text-white transition bg-pink-600 shadow-lg px-7 rounded-xl active:scale-95"
         >
-          Yes💗
+          🙄Yes
         </button>
 
         <button
