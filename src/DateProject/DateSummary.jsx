@@ -22,16 +22,18 @@ export default function DateSummary({ time, place, onRestart }) {
 
   return (
     <div className="relative flex flex-col items-center justify-center p-4 overflow-hidden min-h-dvh bg-gradient-to-b from-pink-100 to-pink-200">
-      
+
       {/* کامپوننت بارش کاغذ رنگی */}
-      <Confetti
-        width={windowDimensions.width}
-        height={windowDimensions.height}
-        recycle={false} // اگر می‌خواهید مداوم ببارد این را true کنید
-        numberOfPieces={400}
-      />
+
 
       <div className="z-10 w-full max-w-sm p-6 border border-pink-200 shadow-xl bg-white/80 backdrop-blur rounded-3xl">
+        <Confetti
+          className=" z-100 top-[50%] right-[50%]"
+          width={windowDimensions.width}
+          height={windowDimensions.height}
+          recycle={false} // اگر می‌خواهید مداوم ببارد این را true کنید
+          numberOfPieces={800}
+        />
         <div className="flex flex-col items-center mb-6">
           <img src={myImage} alt="Success" className="object-contain w-40 h-40 mb-4" />
           <h2 className="text-2xl font-bold text-pink-700">قرارمون ست شد!</h2>
