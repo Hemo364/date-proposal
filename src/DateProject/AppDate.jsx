@@ -40,8 +40,8 @@ const AppDate = () => {
     const safeWidth = 160; 
     const safeHeight = 60;
 
-    const maxLeft = window.innerWidth - safeWidth - padding;
-    const maxTop = window.innerHeight - safeHeight - padding;
+    const maxLeft = window.innerWidth-40 - safeWidth - padding;
+    const maxTop = window.innerHeight-40 - safeHeight - padding;
 
     const left = padding + Math.floor(Math.random() * Math.max(0, maxLeft));
     const top = padding + Math.floor(Math.random() * Math.max(0, maxTop));
