@@ -1,11 +1,11 @@
 import React from "react";
-
+import myImage from "./Assets/downloadNB.png";
 const DateSummary = ({ time, place, onRestart }) => {
   return (
     <div className="flex flex-col items-center justify-center w-screen px-4 py-8 h-dvh bg-gradient-to-b from-pink-100 to-pink-200">
       <div className="w-full max-w-sm p-6 border border-pink-200 shadow-xl bg-white/80 backdrop-blur rounded-3xl">
         <div className="text-center">
-          <div className="mb-2 text-5xl">🎀</div>
+          <div className="w-40 h-40"><img src={myImage} alt="" /></div>
           <h1 className="text-2xl font-extrabold text-pink-700">
             قرارمون ست شد!
           </h1>
