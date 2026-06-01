@@ -11,8 +11,9 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
   }, [selectedTime, selectedPlace]);
 
   return (
+    
     <div className="flex flex-col items-center w-screen px-4 py-6 overflow-hidden bg-pink-100 h-dvh">
-      <h1 className="px-5 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-500 rounded-2xl">
+      <h1 className="px-5 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
         چه ساعتی؟
       </h1>
 
@@ -29,11 +30,11 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
         />
       </div>
 
-      <h3 className="px-5 py-3 mt-6 text-lg font-semibold text-center text-white bg-pink-500 rounded-2xl">
+      <h3 className="px-8 py-2 mt-6 text-lg font-semibold text-center text-white bg-pink-500 rounded-xl">
         کجا؟
       </h3>
 
-      <div className="grid w-full max-w-sm grid-cols-1 gap-2 mt-3">
+      <div className="grid w-full max-w-sm grid-cols-2 gap-2 mt-3">
         {PLACES.map((place) => {
           const active = selectedPlace === place;
           return (
