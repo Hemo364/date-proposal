@@ -52,8 +52,9 @@ export default function DateSummary({ time, place, onRestart }) {
         </div>
 
         <div className="mb-6 text-center">
-          <p className="text-lg font-medium text-pink-600">منتظرت هستم</p>
-          <p className="mt-1 text-sm text-pink-400">پس حتماً آماده باش :)</p>
+          <p className="text-lg font-medium text-pink-600">منتظرت هستم😃</p>
+          <p className="mt-1 text-sm text-pink-400">پس حتماً آماده باش</p>
+          <p className="mt-1 text-sm text-pink-400">مطمئنم کلی خوش میگذره :)</p>
         </div>
 
         <button
