@@ -5,40 +5,50 @@ import DateSummary from "./DateSummary";
 const AppDate = () => {
   const containerRef = useRef(null);
   const noBtnRef = useRef(null);
+  const lastTrigger = useRef(0);
 
   const [noPos, setNoPos] = useState(null);
+  const [noTextIndex, setNoTextIndex] = useState(0);
+  const noTexts = [
+    "No",
+    "نهه؟",
+    "واقعا نهه؟",
+    "دلت میاد؟",
+    "😢?",
+    "واقعا واقعا نهه؟😔",
+    "متاسفم چون",
+    "چاره ای نداری😊",
+  ];
 
-  // "ask" | "set" | "done"
   const [step, setStep] = useState("ask");
+  const [info, setInfo] = useState({ time: "", place: "" });
 
-  // به جای date => time
-  const [info, setInfo] = useState({
-    time: "", // "HH:MM"
-    place: "",
-  });
-
-    const moveNo = (e) => {
+  const moveNo = (e) => {
     if (e && e.preventDefault) {
       e.preventDefault();
     }
 
+    const now = Date.now();
+    if (now - lastTrigger.current < 100) return;
+    lastTrigger.current = now;
+
     const noBtn = noBtnRef.current;
     if (!noBtn) return;
 
-    const b = noBtn.getBoundingClientRect();
+    const padding = 20;
+    // در نظر گرفتن طولانی‌ترین متن برای محاسبه حاشیه امن (حدود 160 پیکسل عرض و 60 پیکسل ارتفاع)
+    const safeWidth = 160; 
+    const safeHeight = 60;
 
-    const padding = 20; // حاشیه امن از لبه‌های صفحه
-    
-    // استفاده از ابعاد کل پنجره برای اطمینان از بیرون نزدن
-    const maxLeft = window.innerWidth - b.width - (padding * 2);
-    const maxTop = window.innerHeight - b.height - (padding * 2);
+    const maxLeft = window.innerWidth - safeWidth - padding;
+    const maxTop = window.innerHeight - safeHeight - padding;
 
     const left = padding + Math.floor(Math.random() * Math.max(0, maxLeft));
     const top = padding + Math.floor(Math.random() * Math.max(0, maxTop));
 
     setNoPos({ left, top });
+    setNoTextIndex((prev) => prev + 1);
   };
-
 
   if (step === "set") {
     return (
@@ -61,6 +71,7 @@ const AppDate = () => {
         onRestart={() => {
           setInfo({ time: "", place: "" });
           setNoPos(null);
+          setNoTextIndex(0);
           setStep("ask");
         }}
       />
@@ -91,21 +102,25 @@ const AppDate = () => {
           🙄Yes
         </button>
 
-        <button
-          type="button"
-          ref={noBtnRef}
-          onMouseEnter={moveNo}
-          onPointerEnter={moveNo}
-          onPointerDown={moveNo}
-          className={`bg-pink-400 text-white px-7 py-3 mt-20 rounded-xl shadow-lg transition-all duration-150 z-50 ${
-            noPos ? "fixed" : ""
-          }`}
-          style={
-            noPos ? { left: `${noPos.left}px`, top: `${noPos.top}px` } : undefined
-          }
-        >
-          No
-        </button>
+        {noTextIndex < noTexts.length && (
+          <button
+            type="button"
+            ref={noBtnRef}
+            onMouseEnter={moveNo}
+            onPointerEnter={moveNo}
+            onPointerDown={moveNo}
+            className={`bg-pink-400 text-white px-7 py-3 mt-20 rounded-xl shadow-lg transition-all duration-150 z-50 ${
+              noPos ? "fixed" : ""
+            }`}
+            style={
+              noPos
+                ? { left: `${noPos.left}px`, top: `${noPos.top}px` }
+                : undefined
+            }
+          >
+            {noTexts[noTextIndex]}
+          </button>
+        )}
       </div>
     </div>
   );
