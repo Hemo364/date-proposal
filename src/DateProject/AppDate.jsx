@@ -17,28 +17,28 @@ const AppDate = () => {
     place: "",
   });
 
-  const moveNo = (e) => {
-    // این خط از شیفت شدن لی‌اوت و کلیک شدن ناخواسته روی دکمه Yes جلوگیری می‌کند
+    const moveNo = (e) => {
     if (e && e.preventDefault) {
       e.preventDefault();
     }
 
-    const container = containerRef.current;
     const noBtn = noBtnRef.current;
-    if (!container || !noBtn) return;
+    if (!noBtn) return;
 
-    const c = container.getBoundingClientRect();
     const b = noBtn.getBoundingClientRect();
 
-    const padding = 12;
-    const maxLeft = c.width - b.width - padding;
-    const maxTop = c.height - b.height - padding;
+    const padding = 20; // حاشیه امن از لبه‌های صفحه
+    
+    // استفاده از ابعاد کل پنجره برای اطمینان از بیرون نزدن
+    const maxLeft = window.innerWidth - b.width - (padding * 2);
+    const maxTop = window.innerHeight - b.height - (padding * 2);
 
-    const left = Math.floor(padding + Math.random() * Math.max(0, maxLeft));
-    const top = Math.floor(padding + Math.random() * Math.max(0, maxTop));
+    const left = padding + Math.floor(Math.random() * Math.max(0, maxLeft));
+    const top = padding + Math.floor(Math.random() * Math.max(0, maxTop));
 
     setNoPos({ left, top });
   };
+
 
   if (step === "set") {
     return (
@@ -97,8 +97,8 @@ const AppDate = () => {
           onMouseEnter={moveNo}
           onPointerEnter={moveNo}
           onPointerDown={moveNo}
-          className={`bg-pink-400 text-white px-7 py-3 mt-20 rounded-xl shadow-lg transition-all duration-150 ${
-            noPos ? "absolute" : ""
+          className={`bg-pink-400 text-white px-7 py-3 mt-20 rounded-xl shadow-lg transition-all duration-150 z-50 ${
+            noPos ? "fixed" : ""
           }`}
           style={
             noPos ? { left: `${noPos.left}px`, top: `${noPos.top}px` } : undefined
