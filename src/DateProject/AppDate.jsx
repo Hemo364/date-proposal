@@ -19,7 +19,6 @@ const AppDate = () => {
     "متاسفم چون",
     "چاره ای نداری😊",
   ];
-
   const [step, setStep] = useState("ask");
   const [info, setInfo] = useState({ time: "", place: "" });
 
