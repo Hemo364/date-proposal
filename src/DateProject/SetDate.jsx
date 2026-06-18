@@ -4,11 +4,12 @@ const PLACES = ["کافه منوچهری🏡", "کافه مون🌓", "کافه 
 
 const SetDate = ({ onBack, onNext, initialValue }) => {
   const [selectedTime, setSelectedTime] = useState(initialValue?.time ?? "");
+  const [selectedDate, setSelectedDate] = useState(initialValue?.date ?? ""); // اضافه شده
   const [selectedPlace, setSelectedPlace] = useState(initialValue?.place ?? "");
 
   const canNext = useMemo(() => {
-    return Boolean(selectedTime) && Boolean(selectedPlace);
-  }, [selectedTime, selectedPlace]);
+    return Boolean(selectedTime) && Boolean(selectedDate) && Boolean(selectedPlace);
+  }, [selectedTime, selectedDate, selectedPlace]);
 
   return (
     
@@ -16,6 +17,20 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
       <h1 className="px-10 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-300 rounded-xl">
         آفرییین حالا دختر خوبی شدی😄
       </h1>
+      
+      {/* اضافه شده */}
+      <h1 className="px-5 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
+        چه روزی ؟
+      </h1>
+      <div className="w-full max-w-sm mt-4">
+        <input
+          type="date"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+          className="w-full px-4 py-3 bg-white border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+        />
+      </div>
+
       <h1 className="px-5 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
         چه ساعتی؟
       </h1>
@@ -70,7 +85,7 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
         <button
           type="button"
           disabled={!canNext}
-          onClick={() => onNext({ time: selectedTime, place: selectedPlace })}
+          onClick={() => onNext({ time: selectedTime, date: selectedDate, place: selectedPlace })}
           className={`w-2/3 py-3 rounded-xl shadow-lg transition flex items-center justify-center ${
             canNext
               ? "bg-pink-600 text-white active:scale-95"

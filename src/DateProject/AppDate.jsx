@@ -20,7 +20,7 @@ const AppDate = () => {
     "چاره ای نداری😊",
   ];
   const [step, setStep] = useState("ask");
-  const [info, setInfo] = useState({ time: "", place: "" });
+  const [info, setInfo] = useState({ date: "", time: "", place: "" }); // date اضافه شد
 
   const moveNo = (e) => {
     if (e && e.preventDefault) {
@@ -35,12 +35,11 @@ const AppDate = () => {
     if (!noBtn) return;
 
     const padding = 20;
-    // در نظر گرفتن طولانی‌ترین متن برای محاسبه حاشیه امن (حدود 160 پیکسل عرض و 60 پیکسل ارتفاع)
-    const safeWidth = 160; 
+    const safeWidth = 160;
     const safeHeight = 60;
 
-    const maxLeft = window.innerWidth-40 - safeWidth - padding;
-    const maxTop = window.innerHeight-40 - safeHeight - padding;
+    const maxLeft = window.innerWidth - 40 - safeWidth - padding;
+    const maxTop = window.innerHeight - 40 - safeHeight - padding;
 
     const left = padding + Math.floor(Math.random() * Math.max(0, maxLeft));
     const top = padding + Math.floor(Math.random() * Math.max(0, maxTop));
@@ -54,8 +53,8 @@ const AppDate = () => {
       <SetDate
         initialValue={info}
         onBack={() => setStep("ask")}
-        onNext={({ time, place }) => {
-          setInfo({ time, place });
+        onNext={({ date, time, place }) => {   // date اضافه شد
+          setInfo({ date, time, place });
           setStep("done");
         }}
       />
@@ -65,10 +64,11 @@ const AppDate = () => {
   if (step === "done") {
     return (
       <DateSummary
+        date={info.date}   // date پاس داده شد
         time={info.time}
         place={info.place}
         onRestart={() => {
-          setInfo({ time: "", place: "" });
+          setInfo({ date: "", time: "", place: "" }); // ریست date
           setNoPos(null);
           setNoTextIndex(0);
           setStep("ask");

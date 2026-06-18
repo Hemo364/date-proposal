@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 import myImage from "./Assets/downloadNB.png"; // مسیر را چک کنید
 
-export default function DateSummary({ time, place, onRestart }) {
+export default function DateSummary({ time, date, place, onRestart }) {
   // برای موبایل فرندلی بودن، ابعاد صفحه را می‌گیریم
   const [windowDimensions, setWindowDimensions] = useState({
     width: window.innerWidth,
@@ -41,6 +41,11 @@ export default function DateSummary({ time, place, onRestart }) {
         </div>
 
         <div className="mb-8 space-y-4">
+          {/* تغییر ترتیب به: تاریخ، ساعت، مکان */}
+          <div className="flex items-center justify-between p-3 rounded-lg bg-pink-50">
+            <span className="font-semibold text-pink-700">تاریخ</span>
+            <span className="text-gray-700">{date || "—"}</span>
+          </div>
           <div className="flex items-center justify-between p-3 rounded-lg bg-pink-50">
             <span className="font-semibold text-pink-700">ساعت</span>
             <span className="text-gray-700">{time || "—"}</span>
