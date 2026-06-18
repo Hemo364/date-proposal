@@ -12,17 +12,17 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
   }, [selectedTime, selectedDate, selectedPlace]);
 
   return (
-    
-    <div className="flex flex-col items-center w-screen px-4 py-6 overflow-hidden bg-pink-100 h-dvh">
+  <div className="flex flex-col items-center w-screen px-4 py-6 overflow-y-auto bg-pink-100 min-h-dvh">
+    <div className="flex flex-col items-center w-full max-w-sm pb-6">
       <h1 className="px-10 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-300 rounded-xl">
         آفرییین حالا دختر خوبی شدی😄
       </h1>
-      
-      {/* اضافه شده */}
-      <h1 className="px-5 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
+
+      <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
         چه روزی ؟
       </h1>
-      <div className="w-full max-w-sm mt-4">
+
+      <div className="w-full mt-4">
         <input
           type="date"
           value={selectedDate}
@@ -31,11 +31,11 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
         />
       </div>
 
-      <h1 className="px-5 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
+      <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
         چه ساعتی؟
       </h1>
 
-      <div className="w-full max-w-sm mt-4">
+      <div className="w-full mt-4">
         <label className="block mb-2 font-semibold text-pink-700">
           ساعت رو انتخاب کن:
         </label>
@@ -52,9 +52,10 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
         کجا؟
       </h3>
 
-      <div className="grid w-full max-w-sm grid-cols-2 gap-2 mt-3">
+      <div className="grid w-full grid-cols-2 gap-2 mt-3">
         {PLACES.map((place) => {
           const active = selectedPlace === place;
+
           return (
             <button
               key={place}
@@ -73,7 +74,7 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
         })}
       </div>
 
-      <div className="flex w-full max-w-sm gap-3 pt-6 mt-auto">
+      <div className="flex w-full gap-3 pt-6 mt-4">
         <button
           type="button"
           onClick={onBack}
@@ -85,7 +86,13 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
         <button
           type="button"
           disabled={!canNext}
-          onClick={() => onNext({ time: selectedTime, date: selectedDate, place: selectedPlace })}
+          onClick={() =>
+            onNext({
+              time: selectedTime,
+              date: selectedDate,
+              place: selectedPlace,
+            })
+          }
           className={`w-2/3 py-3 rounded-xl shadow-lg transition flex items-center justify-center ${
             canNext
               ? "bg-pink-600 text-white active:scale-95"
@@ -96,7 +103,9 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
         </button>
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default SetDate;
