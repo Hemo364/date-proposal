@@ -51,7 +51,8 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
             type="time"
             value={selectedTime}
             onChange={(e) => setSelectedTime(e.target.value)}
-            className="w-full px-4 py-3 bg-white border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+            placeholder="انتخاب ساعت"
+            className="px-4 py-3 bg-white border border-pink-200 w-86 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
           />
         </div>
 
