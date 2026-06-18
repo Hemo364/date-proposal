@@ -31,3 +31,20 @@
     transform: translateY(-10px);
   }
 }
+.rmdp-wrapper {
+  border-radius: 16px !important;
+}
+
+.rmdp-day.rmdp-selected span {
+  background-color: #ec4899 !important;
+}
+
+.rmdp-day:hover span {
+  background-color: #f9a8d4 !important;
+}
+
+.rmdp-header-values {
+  color: #be185d;
+  font-weight: bold;
+}
+

@@ -1,6 +1,9 @@
 import React, { useMemo, useState } from "react";
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 
-const PLACES = ["کافه منوچهری🏡", "کافه مون🌓", "کافه دارچین⛔", "کافه وی🧁","کافه ایوار🧱","کافه باجان😄","یه جای دیگه🙂"];
+const PLACES = ["کافه منوچهری🏡", "کافه مون🌓", "کافه دارچین⛔", "کافه وی🧁", "کافه ایوار🧱", "کافه باجان😄", "یه جای دیگه🙂"];
 
 const SetDate = ({ onBack, onNext, initialValue }) => {
   const [selectedTime, setSelectedTime] = useState(initialValue?.time ?? "");
@@ -12,99 +15,101 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
   }, [selectedTime, selectedDate, selectedPlace]);
 
   return (
-  <div className="flex flex-col items-center w-screen px-4 py-6 overflow-y-auto bg-pink-100 min-h-dvh">
-    <div className="flex flex-col items-center w-full max-w-sm pb-6">
-      <h1 className="px-10 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-300 rounded-xl">
-        آفرییین حالا دختر خوبی شدی😄
-      </h1>
+    <div className="flex flex-col items-center w-screen px-4 py-6 overflow-y-auto bg-pink-100 min-h-dvh">
+      <div className="flex flex-col items-center w-full max-w-sm pb-6">
+        <h1 className="px-10 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-300 rounded-xl">
+          آفرییین حالا دختر خوبی شدی😄
+        </h1>
 
-      <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
-        چه روزی ؟
-      </h1>
+        <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
+          چه روزی ؟
+        </h1>
 
-      <div className="w-full mt-4">
-        <input
-          type="date"
-          value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
-          className="w-full px-4 py-3 bg-white border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
-        />
-      </div>
+        <div className="w-full mt-4">
+          <DatePicker
+            calendar={persian}
+            locale={persian_fa}
+            value={selectedDate}
+            onChange={(date) => setSelectedDate(date?.format("YYYY/MM/DD"))}
+            calendarPosition="bottom-center"
+            inputClass="w-86 px-4 py-3 bg-white border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+            placeholder="انتخاب تاریخ"
+          />
 
-      <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
-        چه ساعتی؟
-      </h1>
+        </div>
 
-      <div className="w-full mt-4">
-        <label className="block mb-2 font-semibold text-pink-700">
-          ساعت رو انتخاب کن:
-        </label>
+        <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
+          چه ساعتی؟
+        </h1>
 
-        <input
-          type="time"
-          value={selectedTime}
-          onChange={(e) => setSelectedTime(e.target.value)}
-          className="w-full px-4 py-3 bg-white border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
-        />
-      </div>
+        <div className="w-full mt-4">
+          <label className="block mb-2 font-semibold text-pink-700">
+            ساعت رو انتخاب کن:
+          </label>
 
-      <h3 className="px-8 py-2 mt-6 text-lg font-semibold text-center text-white bg-pink-500 rounded-xl">
-        کجا؟
-      </h3>
+          <input
+            type="time"
+            value={selectedTime}
+            onChange={(e) => setSelectedTime(e.target.value)}
+            className="w-full px-4 py-3 bg-white border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+          />
+        </div>
 
-      <div className="grid w-full grid-cols-2 gap-2 mt-3">
-        {PLACES.map((place) => {
-          const active = selectedPlace === place;
+        <h3 className="px-8 py-2 mt-6 text-lg font-semibold text-center text-white bg-pink-500 rounded-xl">
+          کجا؟
+        </h3>
 
-          return (
-            <button
-              key={place}
-              type="button"
-              onClick={() => setSelectedPlace(place)}
-              className={`px-4 py-3 rounded-xl shadow-sm border transition text-right
-                ${
-                  active
+        <div className="grid w-full grid-cols-2 gap-2 mt-3">
+          {PLACES.map((place) => {
+            const active = selectedPlace === place;
+
+            return (
+              <button
+                key={place}
+                type="button"
+                onClick={() => setSelectedPlace(place)}
+                className={`px-4 py-3 rounded-xl shadow-sm border transition text-right
+                ${active
                     ? "bg-pink-600 text-white border-pink-600"
                     : "bg-white text-pink-700 border-pink-200"
-                }`}
-            >
-              {place}
-            </button>
-          );
-        })}
-      </div>
+                  }`}
+              >
+                {place}
+              </button>
+            );
+          })}
+        </div>
 
-      <div className="flex w-full gap-3 pt-6 mt-4">
-        <button
-          type="button"
-          onClick={onBack}
-          className="flex items-center justify-center w-1/3 py-3 text-pink-700 bg-white border border-pink-200 shadow-sm rounded-xl"
-        >
-          Back
-        </button>
+        <div className="flex w-full gap-3 pt-6 mt-4">
+          <button
+            type="button"
+            onClick={onBack}
+            className="flex items-center justify-center w-1/3 py-3 text-pink-700 bg-white border border-pink-200 shadow-sm rounded-xl"
+          >
+            Back
+          </button>
 
-        <button
-          type="button"
-          disabled={!canNext}
-          onClick={() =>
-            onNext({
-              time: selectedTime,
-              date: selectedDate,
-              place: selectedPlace,
-            })
-          }
-          className={`w-2/3 py-3 rounded-xl shadow-lg transition flex items-center justify-center ${
-            canNext
-              ? "bg-pink-600 text-white active:scale-95"
-              : "bg-pink-300 text-white/70 cursor-not-allowed"
-          }`}
-        >
-          Next✨
-        </button>
+          <button
+            type="button"
+            disabled={!canNext}
+            onClick={() =>
+              onNext({
+                time: selectedTime,
+                date: selectedDate,
+                place: selectedPlace,
+              })
+            }
+            className={`w-2/3 py-3 rounded-xl shadow-lg transition flex items-center justify-center ${canNext
+                ? "bg-pink-600 text-white active:scale-95"
+                : "bg-pink-300 text-white/70 cursor-not-allowed"
+              }`}
+          >
+            Next✨
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 
 };
 
