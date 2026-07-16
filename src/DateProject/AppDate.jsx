@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import SetDate from "./SetDate";
 import DateSummary from "./DateSummary";
+import bgImage from "./Assets/bigger_blue_background.png"; // اطمینان حاصل کنید مسیر عکس در پروژه شما درست است
 
 const AppDate = () => {
   const containerRef = useRef(null);
@@ -12,6 +13,7 @@ const AppDate = () => {
   const noTexts = [
     "No",
     "نهه؟",
+    "اشتباهی دستت خورده آره؟",
     "واقعا نهه؟",
     "دلت میاد؟",
     "😢?",
@@ -20,7 +22,7 @@ const AppDate = () => {
     "چاره ای نداری😊",
   ];
   const [step, setStep] = useState("ask");
-  const [info, setInfo] = useState({ date: "", time: "", place: "" }); // date اضافه شد
+  const [info, setInfo] = useState({ date: "", time: "", place: "" });
 
   const moveNo = (e) => {
     if (e && e.preventDefault) {
@@ -53,7 +55,7 @@ const AppDate = () => {
       <SetDate
         initialValue={info}
         onBack={() => setStep("ask")}
-        onNext={({ date, time, place }) => {   // date اضافه شد
+        onNext={({ date, time, place }) => {
           setInfo({ date, time, place });
           setStep("done");
         }}
@@ -64,11 +66,11 @@ const AppDate = () => {
   if (step === "done") {
     return (
       <DateSummary
-        date={info.date}   // date پاس داده شد
+        date={info.date}
         time={info.time}
         place={info.place}
         onRestart={() => {
-          setInfo({ date: "", time: "", place: "" }); // ریست date
+          setInfo({ date: "", time: "", place: "" });
           setNoPos(null);
           setNoTextIndex(0);
           setStep("ask");
@@ -80,15 +82,16 @@ const AppDate = () => {
   return (
     <div
       ref={containerRef}
-      className="relative flex flex-col items-center justify-center w-screen px-4 overflow-hidden bg-pink-100 h-dvh"
+      className="relative flex flex-col items-center justify-center w-screen px-4 overflow-hidden bg-center bg-no-repeat bg-cover h-dvh"
+      style={{ backgroundImage: `url(${bgImage})` }}
     >
-      <i className="text-6xl animate-bounce">🎀</i>
+      <i className="text-6xl animate-bounce">️🫧</i>
 
-      <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-pink-500 rounded-2xl">
-        Hello dear Melika
+      <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-blue-600 shadow-md rounded-2xl">
+        Hello dear Mahya
       </h1>
 
-      <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-pink-500 rounded-2xl">
+      <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-blue-600 shadow-md rounded-2xl">
         ?will you go on a date with me
       </h1>
 
@@ -96,7 +99,7 @@ const AppDate = () => {
         <button
           type="button"
           onClick={() => setStep("set")}
-          className="py-3 text-white transition bg-pink-600 shadow-lg px-7 rounded-xl active:scale-95"
+          className="py-3 text-white transition bg-blue-700 shadow-lg hover:bg-blue-800 px-7 rounded-xl active:scale-95"
         >
           🙄Yes
         </button>
@@ -108,7 +111,7 @@ const AppDate = () => {
             onMouseEnter={moveNo}
             onPointerEnter={moveNo}
             onPointerDown={moveNo}
-            className={`bg-pink-400 text-white px-7 py-3 mt-20 rounded-xl shadow-lg transition-all duration-150 z-50 ${
+            className={`bg-sky-400 text-white px-7 py-3 mt-20 rounded-xl shadow-lg transition-all duration-150 z-50 ${
               noPos ? "fixed" : ""
             }`}
             style={

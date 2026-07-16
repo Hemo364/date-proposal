@@ -2,12 +2,13 @@ import React, { useMemo, useState } from "react";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import bgImage from "./Assets/bigger_blue_background.png";  // اطمینان حاصل کنید مسیر عکس در پروژه شما درست است
 
-const PLACES = ["کافه منوچهری🏡", "کافه مون🌓", "کافه دارچین⛔", "کافه وی🧁", "کافه ایوار🧱", "کافه باجان😄", "یه جای دیگه🙂"];
+const PLACES = ["کافه منوچهری🏡", "کافه مون🌓", "کافه دارچین☕", "کافه وی🧁", "کافه ایوار🧱", "کافه باجان😄", "یه جای دیگه🙂"];
 
 const SetDate = ({ onBack, onNext, initialValue }) => {
   const [selectedTime, setSelectedTime] = useState(initialValue?.time ?? "");
-  const [selectedDate, setSelectedDate] = useState(initialValue?.date ?? ""); // اضافه شده
+  const [selectedDate, setSelectedDate] = useState(initialValue?.date ?? "");
   const [selectedPlace, setSelectedPlace] = useState(initialValue?.place ?? "");
 
   const canNext = useMemo(() => {
@@ -15,13 +16,16 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
   }, [selectedTime, selectedDate, selectedPlace]);
 
   return (
-    <div className="flex flex-col items-center w-screen px-4 py-6 overflow-y-auto bg-pink-100 min-h-dvh">
+    <div 
+      className="flex flex-col items-center w-screen px-4 py-6 overflow-y-auto bg-center bg-no-repeat bg-cover min-h-dvh"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
       <div className="flex flex-col items-center w-full max-w-sm pb-6">
-        <h1 className="px-10 py-3 mt-2 text-xl font-semibold text-center text-white bg-pink-300 rounded-xl">
+        <h1 className="px-10 py-3 mt-2 text-xl font-semibold text-center text-white shadow-sm bg-sky-400 rounded-xl">
           آفرییین حالا دختر خوبی شدی😄
         </h1>
 
-        <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
+        <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-blue-600 shadow-sm rounded-xl">
           چه روزی ؟
         </h1>
 
@@ -32,18 +36,17 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
             value={selectedDate}
             onChange={(date) => setSelectedDate(date?.format("YYYY/MM/DD"))}
             calendarPosition="bottom-center"
-            inputClass="w-86 px-4 py-3 bg-white border border-pink-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+            inputClass="w-86 px-4 py-3 bg-white border border-blue-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="انتخاب تاریخ"
           />
-
         </div>
 
-        <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-pink-500 rounded-xl">
+        <h1 className="px-5 py-3 mt-4 text-xl font-semibold text-center text-white bg-blue-600 shadow-sm rounded-xl">
           چه ساعتی؟
         </h1>
 
         <div className="w-full mt-4">
-          <label className="block mb-2 font-semibold text-pink-700">
+          <label className="block mb-2 font-semibold text-blue-800">
             ساعت رو انتخاب کن:
           </label>
 
@@ -52,11 +55,11 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
             value={selectedTime}
             onChange={(e) => setSelectedTime(e.target.value)}
             placeholder="انتخاب ساعت"
-            className="px-4 py-3 bg-white border border-pink-200 w-86 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="px-4 py-3 bg-white border border-blue-200 w-86 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
 
-        <h3 className="px-8 py-2 mt-6 text-lg font-semibold text-center text-white bg-pink-500 rounded-xl">
+        <h3 className="px-8 py-2 mt-6 text-lg font-semibold text-center text-white bg-blue-600 shadow-sm rounded-xl">
           کجا؟
         </h3>
 
@@ -71,8 +74,8 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
                 onClick={() => setSelectedPlace(place)}
                 className={`px-4 py-3 rounded-xl shadow-sm border transition text-right
                 ${active
-                    ? "bg-pink-600 text-white border-pink-600"
-                    : "bg-white text-pink-700 border-pink-200"
+                    ? "bg-blue-600 text-white border-blue-600"
+                    : "bg-white text-blue-800 border-blue-200"
                   }`}
               >
                 {place}
@@ -85,7 +88,7 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
           <button
             type="button"
             onClick={onBack}
-            className="flex items-center justify-center w-1/3 py-3 text-pink-700 bg-white border border-pink-200 shadow-sm rounded-xl"
+            className="flex items-center justify-center w-1/3 py-3 text-blue-800 bg-white border border-blue-200 shadow-sm rounded-xl"
           >
             Back
           </button>
@@ -101,8 +104,8 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
               })
             }
             className={`w-2/3 py-3 rounded-xl shadow-lg transition flex items-center justify-center ${canNext
-                ? "bg-pink-600 text-white active:scale-95"
-                : "bg-pink-300 text-white/70 cursor-not-allowed"
+                ? "bg-blue-600 text-white active:scale-95"
+                : "bg-blue-300 text-white/70 cursor-not-allowed"
               }`}
           >
             Next✨
@@ -111,7 +114,6 @@ const SetDate = ({ onBack, onNext, initialValue }) => {
       </div>
     </div>
   );
-
 };
 
 export default SetDate;
