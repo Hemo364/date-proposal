@@ -101,7 +101,7 @@ const AppDate = () => {
           onClick={() => setStep("set")}
           className="py-3 text-white transition bg-blue-700 shadow-lg hover:bg-blue-800 px-7 rounded-xl active:scale-95"
         >
-          🙄Yes
+          🧘🏻‍♀️️Yes
         </button>
 
         {noTextIndex < noTexts.length && (

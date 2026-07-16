@@ -4,7 +4,7 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import bgImage from "./Assets/bigger_blue_background.png";  // اطمینان حاصل کنید مسیر عکس در پروژه شما درست است
 
-const PLACES = ["کافه منوچهری🏡", "کافه مون🌓", "کافه دارچین☕", "کافه وی🧁", "کافه ایوار🧱", "کافه باجان😄", "یه جای دیگه🙂"];
+const PLACES = ["کافه منوچهری🏡", "کافه مون🌓", "کافه دارچین☕", "کافه وی🧁", "کافه ایوار🧱", "کافه باجان🍵","کافه نوفه🍫", "یه جای دیگه🙂"];
 
 const SetDate = ({ onBack, onNext, initialValue }) => {
   const [selectedTime, setSelectedTime] = useState(initialValue?.time ?? "");
