@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import SetDate from "./SetDate";
 import DateSummary from "./DateSummary";
 import bgImage from "./Assets/bigger_blue_background.png"; // اطمینان حاصل کنید مسیر عکس در پروژه شما درست است
+import NotToCome from "./NotToCome";
 
 const AppDate = () => {
   const containerRef = useRef(null);
@@ -55,6 +56,18 @@ const AppDate = () => {
       <SetDate
         initialValue={info}
         onBack={() => setStep("ask")}
+        onNext={({ date, time, place }) => {
+          setInfo({ date, time, place });
+          setStep("done");
+        }}
+      />
+    );
+  }
+  if (step === "NoComponent") {
+    return (
+      <NotToCome
+        initialValue={info}
+        onBack={() => setStep("set")}
         onNext={({ date, time, place }) => {
           setInfo({ date, time, place });
           setStep("done");
@@ -123,6 +136,13 @@ const AppDate = () => {
             {noTexts[noTextIndex]}
           </button>
         )}
+        <button
+          type="button"
+          onClick={() => setStep("NoComponent")}
+          className="py-3 text-white transition bg-blue-700 shadow-lg hover:bg-blue-800 px-7 rounded-xl active:scale-95"
+        >
+          اصلا دلم نمیخواد بیام😒
+        </button>
       </div>
     </div>
   );
