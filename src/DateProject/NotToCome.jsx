@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import bgImage from "./Assets/bigger_blue_background.png"; 
+import catMascot from "./Assets/Meshkii.jpeg";
 
 const counterMessages = [
     "0",
@@ -12,7 +12,7 @@ const counterMessages = [
     "7😧",
     "8😰",
     "9😭",
-    "10 باورم نمیشه....واقعا یعنی انقد محکم نمیخوای بیای؟ پس 10 بار دیگه هم بزن💔",
+    "10 باورم نمیشه....واقعا یعنی انقد محکم نمیخوای اکسپت کنی؟ پس 10 بار دیگه هم بزن💔",
     "11😰",
     "12😪",
     "13😡",
@@ -22,10 +22,10 @@ const counterMessages = [
     "17😡",
     "18😓",
     "19💔",
-    "20 ایسگاتو گرفتم\n 100 بار دیگه هم بزنی نمیشه چون من برنامه نویس این سایتم😎\n\n نمیام نداریم باید بیای فهمیدی بچه جون؟🐣"
+    "20 ایسگاتو گرفتم\n 100 بار دیگه هم بزنی نمیشه چون من برنامه نویس این سایتم😎\n\n نمیخوام نداریم باید بخوای فهمیدی بچه جون؟🐣"
 ];
 
-const NotToCome = ({ onBack }) => {
+const NotToCome = ({ onAccept, onDecline }) => {
     const [counterIndex, setCounterIndex] = useState(0);
     const [isStarted, setIsStarted] = useState(false); // وضعیت برای شروع چالش
 
@@ -36,48 +36,52 @@ const NotToCome = ({ onBack }) => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center w-screen px-6 py-6 overflow-hidden bg-center bg-no-repeat bg-cover h-dvh"
-            style={{ backgroundImage: `url(${bgImage})` }}>
-            
-            <div className="w-full max-w-sm p-6 text-center shadow-2xl bg-white/90 backdrop-blur-sm rounded-3xl">
-                
-                <h2 className="mb-6 text-xl font-bold text-blue-800">
-                    عجب... پس دلت نمیخواد بیایی آره؟...😠
+        <div className="flex flex-col items-center justify-center w-screen px-6 py-6 overflow-hidden cat-bg-pattern h-dvh">
+
+            <div className="w-full max-w-sm p-6 text-center cat-card">
+                <img
+                    src={catMascot}
+                    alt="گربه"
+                    className="object-contain mx-auto mb-3 rounded-md h-18 w-18 drop-shadow-md"
+                />
+
+                <h2 className="mb-6 text-xl font-bold text-(--cat-black)">
+                    عجب... پس دلت نمیخواد اکسپت کنی آره؟...😠
                 </h2>
 
                 <div className="flex flex-col gap-4">
-                    
+
                     {/* اگر هنوز شروع نکرده، فقط دکمه بعله را نشان بده */}
                     {!isStarted ? (
-                        <button 
+                        <button
                             onClick={() => setIsStarted(true)}
-                            className="flex justify-center w-full py-3 text-blue-800 transition border border-blue-200 shadow-sm bg-blue-50 rounded-xl active:scale-95"
+                            className="w-full py-3 cat-btn-outline"
                         >
                             بعله😏
                         </button>
                     ) : (
                         // اگر بعله را زد، این بخش ظاهر شود
                         <>
-                            <p className="text-sm text-gray-600">
-                                {counterIndex < 20 ? "نه آخه اینجوری نیست که... باید 10 بار بزنی رو دکمه نمیام" : "دیدی گفتم؟"}
+                            <p className="text-sm text-(--cat-black)/70">
+                                {counterIndex < 20 ? "نه آخه اینجوری نیست که... باید 10 بار بزنی رو دکمه نمیخوام" : ""}
                             </p>
 
                             {/* دکمه اصلی نمیام */}
                             {counterIndex < 20 ? (
-                                <button 
-                                    onClick={handleNoClick} 
-                                    className='flex justify-center w-full py-3 font-bold text-center text-white transition bg-red-500 border-b-4 border-red-700 rounded-xl active:border-b-0 active:translate-y-1'
+                                <button
+                                    onClick={handleNoClick}
+                                    className='w-full py-3 cat-btn-primary'
                                 >
-                                    نمیام!
+                                    نمیخوام!
                                 </button>
                             ) : (
-                                <div className="p-4 bg-yellow-100 border-2 border-yellow-400 rounded-2xl animate-bounce">
-                                    <p className="font-bold text-yellow-800">راه فراری نداری! 😂</p>
+                                <div className="p-4 border-2 rounded-2xl animate-bounce" style={{ backgroundColor: "var(--cat-ivory-soft)", borderColor: "var(--cat-pink-deep)" }}>
+                                    <p className="font-bold text-(--cat-black)">راه فراری نداری! 😂</p>
                                 </div>
                             )}
 
                             {/* نمایش وضعیت شمارشگر */}
-                            <div className="p-4 mt-2 font-medium text-center text-blue-600 whitespace-pre-line bg-white border border-blue-100 shadow-inner text-md rounded-2xl">
+                            <div className="p-4 mt-2 font-medium text-center text-(--cat-black) whitespace-pre-line bg-(--cat-ivory-soft) border border-(--cat-black)/15 shadow-inner text-md rounded-2xl backdrop-blur-sm">
                                 {counterMessages[counterIndex]}
                             </div>
                         </>
@@ -85,13 +89,23 @@ const NotToCome = ({ onBack }) => {
 
                     {/* دکمه بازگشت فقط وقتی ظاهر می‌شود که به آخر لیست رسیده باشد */}
                     {counterIndex >= 20 && (
-                        <button
-                            type="button"
-                            onClick={onBack}
-                            className="py-3 mt-4 text-center text-gray-600 underline transition-all decoration-dotted "
-                        >
-                            باشه بابا (برگشت به انتخاب کافه)
-                        </button>
+                        <div className="flex gap-3 mt-4 ">
+                            <button
+                                type="button"
+                                onClick={onAccept}
+                                className="flex-1 py-3 cat-btn-primary"
+                            >
+                                باشه 😌
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={onDecline}
+                                className="flex-1 py-3 cat-btn-outline"
+                            >
+                                نه 😈
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>

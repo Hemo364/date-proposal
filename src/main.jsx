@@ -8,6 +8,7 @@ import AppP from './LastProject/App.jsx';
 import App6 from './ReactApp/App.jsx';
 import AppDate from './DateProject/AppDate.jsx';
 import RegisterForm from './formikProject/RegisterForm.jsx';
+import AppRCH from './RCHshop/App.jsx'
 const Root = document.getElementById('root')
 createRoot(Root).render(
     <BrowserRouter>

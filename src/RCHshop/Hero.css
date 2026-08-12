@@ -1,0 +1,191 @@
+.hero {
+  position: relative;
+  background: var(--ink);
+  color: var(--paper);
+  padding-block: 150px 90px;
+  overflow: hidden;
+}
+
+/* خطوط جاده در پس‌زمینه */
+.hero__grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      to bottom,
+      transparent 0 calc(100% - 1px),
+      rgba(243, 245, 246, 0.05) calc(100% - 1px)
+    ),
+    repeating-linear-gradient(
+      to left,
+      rgba(243, 245, 246, 0.045) 0 2px,
+      transparent 2px 90px
+    );
+  background-size: 100% 90px, 100% 100%;
+  -webkit-mask-image: radial-gradient(
+    120% 90% at 70% 40%,
+    #000 20%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(120% 90% at 70% 40%, #000 20%, transparent 78%);
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 56px;
+  align-items: center;
+}
+
+/* ---------- متن ---------- */
+.hero__eyebrow {
+  color: rgba(243, 245, 246, 0.55);
+}
+
+.hero__title {
+  font-size: clamp(2.5rem, 6.4vw, 5rem);
+  font-weight: 900;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  margin-top: 20px;
+}
+
+.hero__title mark {
+  background: var(--hiviz);
+  color: var(--ink);
+  padding: 0 12px 4px;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.hero__lead {
+  max-width: 46ch;
+  margin-top: 22px;
+  color: rgba(243, 245, 246, 0.68);
+  font-size: 1.05rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.hero__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line-light);
+}
+
+.hero__stats strong {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--hiviz);
+}
+
+.hero__stats span {
+  font-size: 0.8rem;
+  color: rgba(243, 245, 246, 0.55);
+  line-height: 1.5;
+  display: block;
+}
+
+/* ---------- تصویر ---------- */
+.hero__visual {
+  position: relative;
+}
+
+.hero__art {
+  --art-mass: #f3f5f6;
+  --art-line: rgba(243, 245, 246, 0.55);
+  --art-accent: var(--hiviz);
+  padding: 20px;
+  animation: hero-float 7s ease-in-out infinite;
+}
+
+@keyframes hero-float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* پلاک مشخصات */
+.hero__plate {
+  position: absolute;
+  inset-block-end: -18px;
+  inset-inline-start: 0;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  min-width: 260px;
+  box-shadow: var(--shadow);
+  border-inline-end: 5px solid var(--hiviz);
+}
+
+.hero__plate-title {
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.hero__plate dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 22px;
+}
+
+.hero__plate dt {
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.hero__plate dd {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ---------- واکنش‌گرا ---------- */
+@media (max-width: 960px) {
+  .hero {
+    padding-block: 120px 70px;
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero__visual {
+    order: -1;
+  }
+
+  .hero__plate {
+    position: static;
+    margin-top: 10px;
+  }
+
+  .hero__stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero__actions .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,277 @@
+/* ==========================================================================
+   RCH Shop — design tokens
+   پالت: فولاد سرد + زرد شبرنگ (هایویز) + قرمز ردلاین
+   ========================================================================== */
+
+:root {
+  /* رنگ‌ها */
+  --ink: #101419;
+  --ink-2: #1b222b;
+  --ink-3: #2a333e;
+  --steel: #d6dce1;
+  --steel-2: #c3ccd3;
+  --paper: #f3f5f6;
+  --hiviz: #f5c400;
+  --hiviz-dark: #d9ad00;
+  --redline: #d5222b;
+  --muted: #69737d;
+  --line: rgba(16, 20, 25, 0.14);
+  --line-light: rgba(255, 255, 255, 0.16);
+
+  /* تایپوگرافی */
+  --font-fa: 'Vazirmatn', system-ui, sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
+
+  /* لایه‌بندی */
+  --container: 1200px;
+  --radius: 3px;
+  --shadow: 0 18px 40px -24px rgba(16, 20, 25, 0.55);
+}
+
+/* ---------- reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-fa);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--ink);
+  background: var(--steel);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--hiviz);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--hiviz);
+  color: var(--ink);
+}
+
+/* ---------- لایه‌بندی ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.section {
+  padding-block: clamp(64px, 9vw, 120px);
+  position: relative;
+}
+
+.section--paper {
+  background: var(--paper);
+}
+
+.section--ink {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------- تایپوگرافی مشترک ---------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  direction: ltr;
+  justify-content: flex-end;
+}
+
+.eyebrow::after {
+  content: '';
+  width: 34px;
+  height: 2px;
+  background: var(--hiviz);
+}
+
+.section--ink .eyebrow {
+  color: rgba(243, 245, 246, 0.62);
+}
+
+.section-title {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin-top: 14px;
+}
+
+.section-lead {
+  max-width: 56ch;
+  margin-top: 14px;
+  color: var(--muted);
+}
+
+.section--ink .section-lead {
+  color: rgba(243, 245, 246, 0.66);
+}
+
+.section-head {
+  margin-bottom: clamp(36px, 5vw, 60px);
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* ---------- دکمه‌ها ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-fa);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 13px 26px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  transition: transform 0.18s ease, background-color 0.18s ease,
+    color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--hiviz {
+  background: var(--hiviz);
+  color: var(--ink);
+  border-color: var(--hiviz);
+  box-shadow: 0 0 0 0 rgba(245, 196, 0, 0.5);
+}
+
+.btn--hiviz:hover {
+  box-shadow: 0 10px 24px -12px rgba(245, 196, 0, 0.95);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn--outline:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn--outline-light {
+  background: transparent;
+  color: var(--paper);
+  border-color: rgba(243, 245, 246, 0.35);
+}
+
+.btn--outline-light:hover {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
+/* ---------- نوار خطر (المان امضای برند) ---------- */
+.tape {
+  height: 10px;
+  width: 100%;
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--hiviz) 0 14px,
+    var(--ink) 14px 28px
+  );
+  background-size: 39.6px 39.6px;
+  animation: tape-slide 1.6s linear infinite;
+}
+
+@keyframes tape-slide {
+  to {
+    background-position: 39.6px 0;
+  }
+}
+
+/* ---------- انیمیشن ظاهر شدن هنگام اسکرول ---------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

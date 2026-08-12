@@ -1,0 +1,47 @@
+.bike-art {
+  width: 100%;
+  height: auto;
+  /* موتور رو به چپ می‌ایستد تا با جهت خواندن راست‌به‌چپ هم‌سو باشد */
+  transform: scaleX(-1);
+  overflow: visible;
+}
+
+.bike-art .ba-mass {
+  fill: var(--art-mass, var(--ink));
+}
+
+.bike-art .ba-bar {
+  stroke: var(--art-mass, var(--ink));
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.bike-art .ba-line {
+  stroke: var(--art-line, var(--ink));
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.bike-art .ba-tyre {
+  stroke: var(--art-mass, var(--ink));
+  stroke-width: 6;
+}
+
+.bike-art .ba-tyre--knobby {
+  stroke-dasharray: 5 4;
+  stroke-width: 7;
+}
+
+.bike-art .ba-rim {
+  stroke: var(--art-accent, var(--hiviz));
+  stroke-width: 4;
+}
+
+.bike-art .ba-spoke {
+  stroke: var(--art-line, var(--ink));
+  stroke-width: 1.5;
+}
+
+.bike-art .ba-spark {
+  fill: var(--art-accent, var(--hiviz));
+}

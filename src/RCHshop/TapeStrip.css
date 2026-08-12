@@ -1,0 +1,64 @@
+.strip {
+  background: var(--ink-2);
+  color: var(--paper);
+  overflow: hidden;
+}
+
+.strip .tape {
+  height: 6px;
+}
+
+.strip__track {
+  overflow: hidden;
+  padding-block: 16px;
+  -webkit-mask-image: linear-gradient(
+    to left,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to left,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+.strip__row {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: strip-move 30s linear infinite;
+}
+
+.strip:hover .strip__row {
+  animation-play-state: paused;
+}
+
+@keyframes strip-move {
+  to {
+    transform: translateX(50%);
+  }
+}
+
+.strip__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 26px;
+  padding-inline: 13px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: rgba(243, 245, 246, 0.85);
+}
+
+.strip__dot {
+  width: 7px;
+  height: 7px;
+  background: var(--hiviz);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}

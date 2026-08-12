@@ -1,0 +1,102 @@
+.rev {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.rev__card {
+  display: flex;
+  flex-direction: column;
+  background: var(--steel);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+  position: relative;
+}
+
+.rev__card::after {
+  content: '';
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 26px;
+  width: 34px;
+  height: 6px;
+  background: var(--hiviz);
+}
+
+.rev__stars {
+  color: var(--hiviz);
+  font-size: 1.05rem;
+  letter-spacing: 3px;
+  direction: ltr;
+  text-align: right;
+  margin-bottom: 12px;
+}
+
+.rev__stars-off {
+  color: rgba(16, 20, 25, 0.18);
+}
+
+.rev__card blockquote {
+  font-size: 0.98rem;
+  line-height: 1.9;
+  flex: 1;
+}
+
+.rev__card figcaption {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.rev__card figcaption strong {
+  display: block;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.rev__card figcaption span {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* ---------- نوار برندها ---------- */
+.brands {
+  margin-top: clamp(44px, 6vw, 72px);
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.brands__label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.brands ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  flex: 1;
+}
+
+.brands li {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: rgba(16, 20, 25, 0.42);
+  transition: color 0.2s ease;
+}
+
+.brands li:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .rev {
+    grid-template-columns: 1fr;
+  }
+}

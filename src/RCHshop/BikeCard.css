@@ -1,0 +1,132 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px 20px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+
+.card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 26px;
+}
+
+.card__badge {
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+
+.card__brand {
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  color: var(--muted);
+}
+
+.card__art {
+  --art-mass: var(--ink);
+  --art-line: var(--muted);
+  --art-accent: var(--hiviz);
+  padding-block: 10px 6px;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.card:hover .card__art {
+  transform: translateX(-8px);
+}
+
+.card__name {
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.5;
+  margin-top: 6px;
+}
+
+/* شبیه پلاک مشخصات روی شاسی */
+.card__specs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+  padding: 12px 10px;
+  background: rgba(16, 20, 25, 0.045);
+  border-radius: 2px;
+  border-inline-end: 3px solid var(--hiviz);
+}
+
+.card__specs dt {
+  font-size: 0.66rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.card__specs dd {
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.card__price {
+  margin-top: 16px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.card__old {
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--redline);
+}
+
+.card__now {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.card__now b {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-inline-end: 4px;
+}
+
+.card__foot {
+  margin-top: auto;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card__btn {
+  width: 100%;
+  justify-content: center;
+  padding-block: 11px;
+}
+
+.card__stock {
+  font-size: 0.76rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.card__stock.is-low {
+  color: var(--redline);
+  font-weight: 700;
+}

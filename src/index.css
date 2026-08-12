@@ -48,3 +48,66 @@
   font-weight: bold;
 }
 
+/* ===== Cat theme: Starry Night ===== */
+:root {
+  --cat-ivory: #16294d;
+  --cat-ivory-soft: #1c3968;
+  --cat-black: #f4ecd8;
+  --cat-pink: #f2c14e;
+  --cat-pink-deep: #caa23a;
+  --cat-pink-line: #6f9bd6;
+  --cat-navy-deep: #0a1730;
+  --cat-ink: #10182b;
+}
+
+.cat-bg-pattern {
+  background-color: var(--cat-navy-deep);
+  background-image:
+    radial-gradient(ellipse 60% 45% at 82% 12%, rgba(242, 193, 78, 0.3), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 10% 90%, rgba(58, 110, 178, 0.28), transparent 65%),
+    linear-gradient(180deg, #0a1730 0%, #0f2145 55%, #16294d 100%),
+    
+}
+
+.cat-card {
+  @apply shadow-2xl backdrop-blur-xl rounded-3xl;
+  background: linear-gradient(160deg, rgba(28, 57, 104, 0.55), rgba(10, 23, 48, 0.72));
+  border: 1px solid rgba(244, 236, 216, 0.16);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.cat-btn-primary {
+  @apply flex items-center justify-center font-bold transition rounded-xl active:scale-95;
+  background: linear-gradient(135deg, var(--cat-pink), var(--cat-pink-deep));
+  color: var(--cat-ink);
+  box-shadow: 0 6px 20px rgba(242, 193, 78, 0.35);
+}
+.cat-btn-primary:hover {
+  filter: brightness(1.08);
+}
+.cat-btn-primary:disabled {
+  background: var(--cat-ivory-soft);
+  color: var(--cat-black);
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.cat-btn-outline {
+  @apply flex items-center justify-center font-semibold transition rounded-xl active:scale-95 backdrop-blur-md;
+  background: rgba(244, 236, 216, 0.06);
+  color: var(--cat-black);
+  border: 1px solid rgba(244, 236, 216, 0.35);
+}
+.cat-btn-outline:hover {
+  background: rgba(244, 236, 216, 0.12);
+}
+
+.cat-heading {
+  @apply px-5 py-3 text-lg font-semibold text-center rounded-xl backdrop-blur-md;
+  background: rgba(20, 43, 82, 0.5);
+  border: 1px solid rgba(244, 236, 216, 0.18);
+  color: var(--cat-black);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
